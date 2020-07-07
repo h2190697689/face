@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>this</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+// var a1 = 10;
+// this.a2 = 20;
+// a3 = 30;  // 严格模式下该行即报错
+// function getA(){
+// 	// 严格模式下,this指向undefined
+// 	console.log(this.a1);  // 10
+// 	console.log(this.a2);  // 20
+// 	console.log(this.a3);  // 30
+// }
+// getA();
+
+// var a = 10;
+// function fn() {
+// 	var a = 20;
+// 	function foo() {
+// 		console.log(this.a);  //10: foo为单独调用;
+// 		// this指向undefined,非严格指向window
+// 	}
+// 	foo();
+// }
+// fn();
+
+
+// var a = 10;
+// var person = {
+// 	a: 20,
+// 	log: function(){
+// 		console.log(this.a);
+// 	}
+// }
+// var newLog = person.log;
+// newLog.call(person);  // 20
+
+
+// function Person(name){
+// 	this.name = name
+// }
+// Person.prototype.sayHello= function(){
+// 	console.log("hello-",this.name) 
+// }
+// var person1 = new Person("min");  // hello-min;
+
+		// var a = 20;
+		// function foo() {
+		//   var a = 1;
+		//   var obj = {
+		//     a: 10,
+		//     c: this.a + 20,
+		//     fn: function () {
+		//       return this.a;
+		//     }
+		//   }
+		//   return obj.c;
+		// }
+		// console.log(foo());   
+		// console.log(window.foo()); 
+
+
+
+// var c = {
+// 	a: 60,
+// 	foo: function(){
+// 		var a = 1;
+// 		var obj = {
+// 			a: 10,
+// 			c: this.a + 20,
+// 			fn: function () {
+// 			    console.log(this.a);
+// 			}
+// 		}
+// 		obj.fn();
+// 	    return obj.c;
+// 	}
+// }
+// console.log(c.foo());   // 输出  10  80
+
+
+
+		// function foo() {
+		//   console.log(this.a)
+		// }
+		// function active(fn) {
+		//   fn(); // 真实调用者，为独立调用
+		// }
+		// var a = 20;
+		// var obj = {
+		//   a: 10,
+		//   getA: foo
+		// }
+        // active(obj.getA);
+
+
+// var a = 1;
+// function test(){
+// 	console.log(this.a)
+// }
+// var o = {
+// 	a: 2,
+// 	fn(){
+// 		var a = 3;
+// 		test();
+// 	}
+// }
+// o.fn();  // 1
+
+
+var a = 1;
+var obj = {
+	a: 2,
+	getA: ()=>this.a,
+	getB: function(){
+		return ()=>this.a
+	},
+	getC: function(){
+		return this.a;
+	},
+	getD: function(){
+		return function(){
+			return this.a
+		}
+	}
+}
+console.log(obj.getA()); // 1
+console.log(obj.getB()());  // 2
+console.log(obj.getC());  // 2
+console.log(obj.getD()());  // 1
+
+	</script>
+</body>
+</html>

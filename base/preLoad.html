@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>预加载</title>
+	<style type="text/css">
+		.container{
+
+		}
+		.container img{
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>hello preLoad</h1>
+		<img id="img" title="预加载图片" alt="暂无加载" src="./img.jpg"/>
+	</div>
+	<script type="text/javascript">
+		var imgEle = document.querySelector("#img");
+		console.log(imgEle.complete)
+
+		function preLoadImg(url){
+			var img = new Image();
+			img.src = url;
+			if(img.complete){
+				console.log(img.width)
+			} else{
+				img.onload = function(){
+					console.log(img.width)
+				}
+			}
+		}
+	</script>
+</body>
+</html>

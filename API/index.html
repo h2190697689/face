@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>API</title>
+	<style>
+		html,body{
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#name{
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+			margin: auto;
+		}
+		#name:after{
+			content: ",";
+			width: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="name">hello</div>
+	<script type="text/javascript">
+		var node = document.querySelector("#name");
+		console.log(node.ownerDocument.defaultView);
+		console.log(document.documentElement);
+		console.log(node.getBoundingClientRect())
+		console.log(window.getComputedStyle(node,null));
+		console.log(window.getComputedStyle(node,"after"))
+		console.log(node.style);
+	</script>
+</body>
+</html>

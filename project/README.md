@@ -10,5 +10,7 @@
 3. select中下拉数据过大，数据卡顿
 - 虚拟列表, 加载了一万条数据，但显示出来的只有10条，
   只渲染那10条,其他数据暂时不渲染,等滚动到该位置再进行渲染,
-  当前react-window , react-virtualized都能实现                                                                                    
+  当前react-window , react-virtualized都能实现
+
+4. 左侧菜单menu,menu控制着路由                                                                                    
                                                                                  
