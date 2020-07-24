@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue</title>
+</head>
+<body>
+	<input type="text" id="a" />
+	<div id="b"></div>
+	<script type="text/javascript">
+		var value = "";
+		var obj = {};
+		Object.defineProperty(obj, "name",{
+			set: function(newValue){
+				value = newValue;
+				document.getElementById("a").value = newValue;
+				document.getElementById("b").textContent = newValue;
+			},
+			get: function(){
+				return value;
+			}
+		});
+		document.getElementById("a").onkeyup = function(e){
+			obj.name = e.target.value;
+		}
+	</script>
+</body>
+</html>

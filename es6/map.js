@@ -5,11 +5,18 @@ const m = new Map();
 const o = { p: "hello world"};
 
 m.set(o, "content");
+
+var a = new Map([["name",2]])  //构造方式
+for(let value of a){
+    console.log(value)
+}
+
+
 m.get(o);
 
 m.has(o);
 m.delete(o);
-m.has(o)
+m.has(o);
 
 /* 操作方法 */
 m.size   // 返回键值对数

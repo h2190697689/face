@@ -1,6 +1,7 @@
 ### 强缓存
 1. expires
 2. Cache-Control: public, max-age=0
+3. progma
 
 ### 协商缓存
 1. ETag: W/"8bf-17272c9f1e3"  / If-None-Match: W/"8bf-17272c9f1e3"

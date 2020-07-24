@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>defineProperty</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//如果一个描述符同时拥有value或writable和get或set键则会产生一个异常
+		var person = {
+			name: "min"
+		}
+		Object.defineProperty(person,"name",{
+			// value: "name",
+			// get: function(){
+			// 	return "hello"
+			// },
+			// set: function(){
+
+			// },
+			configurable: false
+		})
+
+
+	</script>
+</body>
+</html>

@@ -1,1 +1,46 @@
-float.html
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>float</title>
+	<style type="text/css">
+		.clearfix:after{
+			content: "020"; 
+			display: block; 
+			height: 0; 
+			clear: both; 
+			visibility: hidden;  
+		}
+		.news {
+			background-color: gray;
+			border: solid 1px black;
+			overflow: hidden;
+			*zoom: 1;
+			background-color: red;
+		}
+
+		.news img {
+			width: 100px;
+			height: 100px;
+			float: left;
+		}
+
+		.news p {
+			width: 100px;
+			height: 100px;
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div class="news">
+		<img src="news-pic.jpg" />
+		<p>some text</p>
+	</div>
+	<script type="text/javascript">
+		// 1. 添加额外标签  clear: both;
+		// 2. 父级添加 overflow:hidden;
+		// 3. 使用after伪元素
+	</script>
+</body>
+</html>
