@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet/less" type="text/css" href="./styles.less" />
+  <title>EXIF</title>
+</head>
+<body>
+  <div class="box">
+    <img width="200px" id="img" src="" alt="图片" />
+    <input id="input" type="file" onchange="upLoad()" multiple="multiple"/>
+    <button onclick="sendFile()">上传</button>
+  </div>
+  <script>
+    function upLoad() {
+      var fileInput = document.getElementById('input')
+      var file = fileInput.files[0] // 获取上传图片的信息
+      console.log('file', file)
+      EXIF.getData(file, function() {
+          console.log(this);
+        let exifTags = EXIF.getAllTags(this); // 获取上传图片的元数据
+        console.log('exifTags', exifTags)
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = e => {
+          let imgData = e.target.result;  // 通过FileReader读取到文件路径
+          console.log("e",e.target);
+          // 8 表示 顺时针转了90; 3 表示 转了 180; 6 表示 逆时针转了90
+        if (exifTags.Orientation == 8 ||
+          exifTags.Orientation == 3 ||
+          exifTags.Orientation == 6) {
+          const img = new Image();
+          img.src = imgData;
+          img.onload = function () {
+            let cvs = document.createElement('canvas');
+            let ctx = cvs.getContext('2d');
+
+            //如果旋转90
+            if (
+              exifTags.Orientation == 8 ||
+              exifTags.Orientation == 6
+            ) {
+              cvs.width = img.height;
+              cvs.height = img.width;
+            } else {
+              cvs.width = img.width;
+              cvs.height = img.height;
+            }
+
+            if (exifTags.Orientation == 6) {
+              //原图逆时针转了90, 所以要顺时针旋转90
+              ctx.rotate(Math.PI / 180 * 90);
+              // 将参照点移动到画板的中心点；
+            //   ctx.translate(ctx.width/2, ctx.height/2);
+
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                img.width,
+                img.height,
+                0,
+                -img.height,
+                img.width,
+                img.height
+              );
+            }
+
+            if (exifTags.Orientation == 3) {
+              //原图逆时针转了180, 所以顺时针旋转180
+              ctx.rotate(Math.PI / 180 * 180);
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                img.width,
+                img.height,
+                -img.width,
+                -img.height,
+                img.width,
+                img.height
+              );
+            }
+
+            if (exifTags.Orientation == 8) {
+              //原图顺时针旋转了90, 所以要你时针旋转90
+              ctx.rotate(Math.PI / 180 * -90);
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                img.width,
+                img.height,
+                -img.width,
+                0,
+                img.width,
+                img.height
+              );
+            }
+
+            const url = cvs.toDataURL('image/png')
+            let imgNode = document.getElementById('img')
+            imgNode.setAttribute('src', url)
+          }
+        } 
+        else {
+          let imgNode = document.getElementById('img')
+        //   imgNode.setAttribute('src', imgData)
+        console.log(window.URL.createObjectURL(file));
+            imgNode.setAttribute('src', window.URL.createObjectURL(file))
+        }
+        }
+      })
+    }
+  </script>
+  <script src="https://cdn.bootcss.com/exif-js/2.3.0/exif.min.js"></script>
+  <script>
+    function sendFile(){
+        var fd = new FormData();
+        var fileInput = document.getElementById('input')
+        var file = fileInput.files[0] // 获取上传图片的信息
+        console.log(fileInput.files);
+        return;
+        fd.append("file",file);
+        console.log(fd);
+        var xhr = new  XMLHttpRequest();
+        xhr.open("post", "/data",true);
+        xhr.send(fd)
+    }
+  </script>
+</body>
+</html>

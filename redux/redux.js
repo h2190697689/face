@@ -31,7 +31,9 @@ const createStore = (reducer, enhancer)=>{
 }
 
 
-/* compose */
+/* 
+* @desc 中间件核心
+* compose */
 const compose = (...func)=>{
 	if(func.length === 0){
 		return arg => arg
@@ -39,21 +41,20 @@ const compose = (...func)=>{
 	if(func.length === 1){
 		return func[0]
 	}
-	return func.reducer((now,item)=>(...args)=>now(item(...args)))
+	return func.reduce((now,item)=>(...args)=>now(item(...args)))
 }
 
 
 /* applyMiddle */
 const applyMiddle = (...middlewares)=>{
-	return (createStore)=>(...args)=>{
+	return (createStore)=>(...args)=>{  //  reducer, preloadedState, enhancer
 		const store = createStore(...args);
-		const dispatch = store.dispatch;
 		const apiMiddlewareApi = {
 			getState: store.getState,
-			dispatch
+			dispatch: store.dispatch
 		};
 		const chains = middlewares.map(middleware=> middleware(apiMiddlewareApi));
-		const dispatch = compose(chains)(dispatch);
+		const dispatch = compose(chains)(store.dispatch);
 		return {
 			...store,
 			dispatch

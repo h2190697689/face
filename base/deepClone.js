@@ -5,3 +5,10 @@ function deepClone(obj){
     }
     return arr
 }
+
+
+// 由于typeof 使用时,构造类型默认为对象 (new String,  new Boolean)
+function judgeType(value){
+	var str = Object.prototype.toString.call(value);
+	return str.split(" ")[1];
+}

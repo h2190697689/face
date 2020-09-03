@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            width: 100px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: blue;
+        }
+        .content{
+            width: 100px;
+            height: 600px;
+            overflow-y: auto;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap" class="wrap">
+        <div id="content" class="content"></div>
+    </div>
+    <script>
+        var wrap = document.querySelector("#wrap");
+        var content = document.querySelector("#content");
+    </script>
+</body>
+</html>

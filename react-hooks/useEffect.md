@@ -1,3 +1,5 @@
+## useEffect
+
 ### 模拟componentDidMount、componentDidUpdate、componentWillUnmount
 1. 第二个参数不传
 - 每次更新都会执行,先执行return内容，再执行内部内容
@@ -10,6 +12,7 @@
 
 
 * 首次加载时,上面情况都只执行内部内容
+class 
 
 ### useLayoutEffect对比
 1. useEffect: render结束后,执行callback函数,不阻塞浏览器绘制(一般进行两次回流、重绘)

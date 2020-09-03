@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scroll</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .wrap{
+            width: 100px;
+            height: 300px;
+            border: 1px solid yellow;
+            overflow-y: auto;
+
+            scrollbar-arrow-color: red; /*上下按钮上三角箭头的颜色*/
+            scrollbar-face-color: #CBCBCB; /*滚动条凸出部分的颜色*/
+            scrollbar-3dlight-color: blue; /*滚动条亮边的颜色*/
+            scrollbar-highlight-color: #333; /*滚动条空白部分的颜色*/
+            scrollbar-shadow-color: yellow; /*滚动条阴影的颜色*/
+            scrollbar-darkshadow-color: green; /*滚动条强阴影的颜色*/
+            scrollbar-track-color: #eee; /*滚动条背景颜色*/
+
+            scrollbar-base-color: black; /*滚动条的基本颜色*/
+            Cursor:url(mouse.cur); /*自定义个性鼠标*/
+        }
+        .content{
+            height: 600px;
+            background-color: yellowgreen;
+        }
+
+        /*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+        /* ::-webkit-scrollbar {
+            width: 3px;  /*高度*/
+            height: 3px; /*纵向宽度*/
+            background-image: linear-gradient(135deg, #1DE9B6 0%, rgba(8, 196, 219, 0.5) 72%, rgba(0, 182, 234, 0.3) 100%);
+        }
+
+        /*定义滚动条的轨道颜色、内阴影及圆角*/
+        ::-webkit-scrollbar-track {
+            border-radius: 0;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: rosybrown;
+        }
+
+        /*定义滑块颜色、内阴影及圆角*/
+        ::-webkit-scrollbar-thumb {
+            border-radius: 0;
+            background-image: linear-gradient(135deg, #1DE9B6 0%, #08c4db 72%, #057494 100%);
+            transition: all .2s;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(95, 95, 95, 0.7);
+        }
+
+        /*定义两端按钮的样式*/
+        ::-webkit-scrollbar-button {
+            background-color:cyan;
+        }
+
+        /*定义右下角汇合处的样式*/
+        ::-webkit-scrollbar-corner {
+            background:khaki;
+        } */
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="content"></div>
+    </div>
+</body>
+</html>

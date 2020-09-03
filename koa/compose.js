@@ -12,3 +12,9 @@ function compose(middlewares){
         return dispatch(0)
     }
 }
+
+app.use(async (ctx,next)=>{
+	console.log("start");
+	await next();
+	console.log("end")
+})

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>事件循环</title>
+</head>
+<body>
+	<div id="name"></div>
+	<script type="text/javascript">
+		var c = 33;
+		console.log(1);
+		document.querySelector("#name").textContent = "hejiamin";
+		setTimeout(()=>{
+			debugger;
+			console.log(2); 
+		})
+		// console.log(b);
+	</script>
+	<script type="text/javascript">
+		console.log(3);
+		var a = 26
+		function b(){
+
+		}
+		debugger;
+		console.log(c)
+	</script>
+	1 9 7 8 2  3  10  11  12 13
+</body>
+</html>
