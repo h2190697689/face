@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>next</title>
+</head>
+<body>
+	<div id="content" onclick="change()">next</div>
+	<script type="text/javascript">
+		function change(){
+			var content = document.querySelector("#content");
+			content.innerText = "name";
+			console.log(content.innerHTML);
+			Promise.resolve().then(()=>{
+				console.log(content.textContent);
+			})
+		}
+	</script>
+</body>
+</html>

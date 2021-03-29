@@ -54,62 +54,62 @@
 
 
 
-// function Super(age){
-// 	this.age = age;
-// 	this.getAge = function(){
-// 		console.log(this.age)
-// 	}
-// }
-// function Child(name,age){
-// 	Super.call(this,age)
-// 	this.name = name;
-// }
-// Child.prototype = new Super();  
-// Child.prototype.constructor = Child;
-// var child = new Child("min",23);
-// console.log(child instanceof Super); // true
-// console.log(child instanceof Child); // true
-// console.log(child.constructor);  // Child
+function Super(age){
+	this.age = age;
+	this.getAge = function(){
+		console.log(this.age)
+	}
+}
+function Child(name,age){
+	Super.call(this,age)
+	this.name = name;
+}
+Child.prototype = new Super();  
+Child.prototype.constructor = Child;
+var child = new Child("min",23);
+console.log(child instanceof Super); // true
+console.log(child instanceof Child); // true
+console.log(child.constructor);  // Child
 
 
 
-// function Super(age){
-// 	this.age = age;
-// 	this.getAge = function(){
-// 		console.log(this.age)
-// 	}
-// }
-// function Child(name,age){
-// 	Super.call(this,age)
-// 	this.name = name;
-// }
-// (function(){
-// 	function Copy(){}
-// 	Copy.prototype = Super.prototype；
-// 	Child.prototype = new Copy();
-// })()
-// Child.prototype.constructor = Child;
-// var child = new Child("min",23);
+function Super(age){
+	this.age = age;
+	this.getAge = function(){
+		console.log(this.age)
+	}
+}
+function Child(name,age){
+	Super.call(this,age)
+	this.name = name;
+}
+(function(){
+	function Copy(){}
+	Copy.prototype = Super.prototype;
+	Child.prototype = new Copy();
+})()
+Child.prototype.constructor = Child;
+var child = new Child("min",23);
 
-// function Super(age){
-// 	this.age = age;
-// 	this.getAge = function(){
-// 		console.log(this.age)
-// 	}
-// }
-// function Child(name,age){
-// 	Super.call(this,age)
-// 	this.name = name;
-// }
-// Child.prototype = Object.create(Super.prototype,{
-// 	constructor:{   // 构造函数修复
-// 		value: Child
-// 	}
-// })
-// var child = new Child("min",23);
-// console.log(child instanceof Super); // true
-// console.log(child instanceof Child); // true
-// console.log(child.constructor);  // Child
+function Super(age){
+	this.age = age;
+	this.getAge = function(){
+		console.log(this.age)
+	}
+}
+function Child(name,age){
+	Super.call(this,age)
+	this.name = name;
+}
+Child.prototype = Object.create(Super.prototype,{
+	constructor:{   // 构造函数修复
+		value: Child
+	}
+})
+var child = new Child("min",23);
+console.log(child instanceof Super); // true
+console.log(child instanceof Child); // true
+console.log(child.constructor);  // Child
 
 
 function Super(){}

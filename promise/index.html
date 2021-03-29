@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>promise</title>
+</head>
+<body>
+	<span onclick="test()">test</span>
+	<script type="text/javascript">
+		var PENDING = "pending";
+		var FULFILLED = "fulfilled";
+		var REJECTED = "rejected";
+		function MyPromise(constructor){
+			this.status = PENDING;
+			this.value = undefined;
+			this.fulfillList = [];
+			this.rejectedList = [];
+			var that = this;
+			// 内部resolve方法
+			var resolveFn = function(result){
+				if(that.status !== PENDING) return;
+				setTimeout(()=>{   // 让then先执行
+					that.status = FULFILLED;
+					that.value = result;
+					console.log(that.fulfillList);
+					that.fulfillList.forEach((fn)=>{
+						typeof fn === "function" && fn(that.value);
+					})
+				})
+			}
+
+			var rejectFn = function(err){
+				if(that.status !== PENDING) return;
+				setTimeout(()=>{   // 让then先执行
+					that.status = REJECTED;
+					that.value = err;
+					that.rejectedList.forEach((fn)=>{
+						typeof fn === "function" && fn(that.value);
+					})
+				})
+			}
+
+			this.then = function(resolveCallBack, rejectCallBack){
+				return new MyPromise((resolve,reject)=>{
+					that.fulfillList.push(()=>{
+						var x = resolveCallBack(that.value);
+						console.log(x);
+						x instanceof MyPromise ? x.then(resolve, reject): resolve(x);
+					});
+					that.rejectedList.push(()=>{
+						var x = rejectCallBack(that.value);
+						x instanceof MyPromise ? x.then(resolve, reject): resolve(x);
+					});		
+				})
+				// that.fulfillList.push(resolveCallBack);
+				// that.rejectedList.push(rejectCallBack);
+			}
+			try{
+				constructor(resolveFn, rejectFn);
+			}catch(err){
+				rejectFn(err)
+			}
+		}
+
+
+		function test(){
+			new MyPromise((resolve, reject)=>{
+				resolve(123)
+			})
+			.then((res)=>{
+				console.log(res);
+				return res + 123
+			})
+			.then(res=>{
+				console.log(res);
+				return "min"
+			}).then(res=>{
+				console.log(res);
+			})
+		}
+	</script>
+</body>
+</html>

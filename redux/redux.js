@@ -3,9 +3,9 @@
 */
 
 /*  createStore */
-const createStore = (reducer, enhancer)=>{
+const createStore = (reducer, preloadState, enhancer)=>{
 	if(enhancer){
-		return enhancer(createStore)(reducer)
+		return enhancer(createStore)(reducer, preloadState)
 	}
 	let state = {};
 	let listenters = [];

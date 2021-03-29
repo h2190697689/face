@@ -13,12 +13,13 @@
     <button onclick="sendFile()">上传</button>
   </div>
   <script>
+
     function upLoad() {
       var fileInput = document.getElementById('input')
       var file = fileInput.files[0] // 获取上传图片的信息
       console.log('file', file)
+      console.log('files', fileInput.files)
       EXIF.getData(file, function() {
-          console.log(this);
         let exifTags = EXIF.getAllTags(this); // 获取上传图片的元数据
         console.log('exifTags', exifTags)
         let reader = new FileReader();
@@ -100,13 +101,16 @@
             }
 
             const url = cvs.toDataURL('image/png')
+            const blob =  dataURLToBlob(url);
+            console.log(url);
+            console.log(blob);
             let imgNode = document.getElementById('img')
-            imgNode.setAttribute('src', url)
+            imgNode.setAttribute('src', blob)
           }
         } 
         else {
           let imgNode = document.getElementById('img')
-        //   imgNode.setAttribute('src', imgData)
+          imgNode.setAttribute('src', imgData)
         console.log(window.URL.createObjectURL(file));
             imgNode.setAttribute('src', window.URL.createObjectURL(file))
         }
@@ -121,7 +125,6 @@
         var fileInput = document.getElementById('input')
         var file = fileInput.files[0] // 获取上传图片的信息
         console.log(fileInput.files);
-        return;
         fd.append("file",file);
         console.log(fd);
         var xhr = new  XMLHttpRequest();

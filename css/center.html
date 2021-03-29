@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>居中</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.parent{
+			width: 300px;
+			height: 300px;
+			border: 1px solid red;
+			/*overflow: hidden;*/
+		}
+		.child{
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+			margin-top: 30px;
+		}
+
+		.parent{
+			display: flex;
+		}
+		/*.parent:after{
+			content: "";
+			display: inline-block;
+			width: 1px;
+			height: 100%;
+			vertical-align: middle;
+		}*/
+		.child{
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="parent">
+		<div class="child"></div>
+	</div>
+</body>
+</html>

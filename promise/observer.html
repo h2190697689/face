@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutationObserver</title>
+    <style>
+        #wrap{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+        @media screen and (min-width: 1600px){
+            #wrap{
+            width: 200px;
+            height: 200px;
+            background-color: greenyellow;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <h1 onclick="add()">hello,MutationObserver</h1>
+        <h2 onclick="change()">change</h2>
+    </div>
+    <script>
+        const wrap = document.querySelector("#wrap");
+        function add(){
+            wrap.style.width = "300px";
+        }
+
+        function change(){
+            wrap.style.width = "400px";
+        }
+
+    function mutationObserver(){
+         // 选择需要观察变动的节点
+        const targetNode = document.getElementById('wrap');
+
+        // 观察器的配置（需要观察什么变动）
+        const config = { 
+            attributes: true,  // 观察目标属性值的变化
+            childList: true,  // 观察目标子节点的变化,添加或者删除目标子节点
+            subtree: true,  // 目标以及目标的后代改变都会观察
+            characterData: true, // 观察目标数据的改变
+            attributeOldValue: true,  // 需要记录改变前的目标属性值
+            characterDataOldValue: true,  // ,表示需要记录改变之前的目标数据
+            attributeFilter: true // 设置一个需要观察的属性本地名称（不需要命名空间）的列表
+        };
+
+        // 当观察到变动时执行的回调函数
+        const callback = function(mutationsList, observer) {
+            // Use traditional 'for loops' for IE 11
+            console.log("mutationsList",mutationsList)
+            console.log("observer",observer)
+            for(let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    console.log('A child node has been added or removed.');
+                }
+                else if (mutation.type === 'attributes') {
+                    console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                }
+            }
+        };
+
+        // 创建一个观察器实例并传入回调函数
+        const observer = new MutationObserver(callback);
+
+        // 以上述配置开始观察目标节点
+        observer.observe(targetNode, config);
+
+        // 之后，可停止观察
+        // observer.disconnect();
+    }
+
+
+    function resizeObserver(){
+        const targetNode = document.getElementById('wrap');
+        const observer = new ResizeObserver(entries=>{
+            console.log("entries",entries)
+        })
+        observer.observe(targetNode);
+    }
+
+    document.addEventListener("DOMContentLoaded",resizeObserver);
+    
+    </script>
+</body>
+</html>
